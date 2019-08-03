@@ -3,11 +3,11 @@ import moment from 'moment';
 // January 1st, 1970
 // get visible expenses
 const getVisibleExpenses = (expenses, {text, startDate, endDate, sortBy}) => {
-    return expenses.filter((expense) => {
-    //    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate; 
+     //    const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate; 
     //    const endDateMatch = typeof endDate !== 'number' || expense.createdAt <= endDate; 
+    return expenses.filter((expense) => {
        const startDateMatch = startDate ? startDate.isSameOrBefore(moment(expense.createdAt), 'day') : true;
-       const endDateMatch = endDate ? endDate.isSameOrAfter(expense.createdAt) :true;
+       const endDateMatch = endDate ? endDate.isSameOrAfter((expense.createdAt), 'day') :true;
        const textMatch = text == '' || expense.description.toLowerCase().includes(text.toLowerCase());
 
        return startDateMatch && endDateMatch && textMatch;
