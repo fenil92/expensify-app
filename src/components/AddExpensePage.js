@@ -1,18 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {addExpense} from '../actions/expenses';
+import {startAddExpense} from '../actions/expenses';
 import ExpenseForm from './ExpenseForm';
-import { AST_PropAccess } from 'terser';
 
 const AddExpensePage = (props) => (
     <div>
         <ExpenseForm  onSubmit={
             (expense) => {
-               props.dispatch(addExpense(expense));
+               props.addExpense(expense);
                props.history.push('/');
             }
         }/>
     </div>
 );
 
-export default connect()(AddExpensePage);
+const mapDispatchToProps = (dispatch) => ({
+    addExpense : (expense) => dispatch(startAddExpense(expense))
+});
+
+export default connect(undefined, mapDispatchToProps)(AddExpensePage);
